@@ -4,6 +4,7 @@
 //
 
 import AzureCommunicationCommon
+import SwiftUI
 
 class TypingParticipantsViewModel: ObservableObject {
     private let logger: Logger

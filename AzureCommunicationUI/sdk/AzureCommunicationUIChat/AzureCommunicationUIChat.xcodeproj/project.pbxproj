@@ -134,6 +134,7 @@
 		521A024528FE1E8D002CAD8E /* TypingParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A024328FE1E8D002CAD8E /* TypingParticipantsView.swift */; };
 		6956EB16291341B0003CCC7E /* ReadReceiptInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6956EB15291341B0003CCC7E /* ReadReceiptInfoModel.swift */; };
 		69FEF0822909D68500F54FC4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FEF0812909D68500F54FC4 /* StringExtension.swift */; };
+		7503AC4E298834EE0029ED2C /* FluentUIResources-ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7503AC4D298834EE0029ED2C /* FluentUIResources-ios.bundle */; };
 		7529F5E0296618AE002F7CE1 /* BaseLocalizationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7529F5DF296618AE002F7CE1 /* BaseLocalizationProvider.swift */; };
 		7529F5E429679524002F7CE1 /* LocalizationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7529F5E329679524002F7CE1 /* LocalizationOptions.swift */; };
 		756F59672965DAD100BAFBF7 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F59652965DAD100BAFBF7 /* Reducer.swift */; };
@@ -309,6 +310,7 @@
 		521A024328FE1E8D002CAD8E /* TypingParticipantsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingParticipantsView.swift; sourceTree = "<group>"; };
 		6956EB15291341B0003CCC7E /* ReadReceiptInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptInfoModel.swift; sourceTree = "<group>"; };
 		69FEF0812909D68500F54FC4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		7503AC4D298834EE0029ED2C /* FluentUIResources-ios.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "FluentUIResources-ios.bundle"; path = "../../../../DerivedData/CallingWithChat/Build/Products/Debug-iphonesimulator/FluentUIResources-ios.bundle"; sourceTree = "<group>"; };
 		7529F5DF296618AE002F7CE1 /* BaseLocalizationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLocalizationProvider.swift; sourceTree = "<group>"; };
 		7529F5E329679524002F7CE1 /* LocalizationOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationOptions.swift; sourceTree = "<group>"; };
 		756F59652965DAD100BAFBF7 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 		50CB81B828C26E0B00680566 = {
 			isa = PBXGroup;
 			children = (
+				7503AC4D298834EE0029ED2C /* FluentUIResources-ios.bundle */,
 				7584840C291D81AE006373B3 /* Shared Sources */,
 				50CB81C428C26E0C00680566 /* Sources */,
 				50CB81CE28C26E0C00680566 /* Tests */,
@@ -1101,6 +1104,7 @@
 			files = (
 				BDB1B8D628F8C8D30000300F /* Assets.xcassets in Resources */,
 				50CB81E728C2701C00680566 /* Localizable.strings in Resources */,
+				7503AC4E298834EE0029ED2C /* FluentUIResources-ios.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

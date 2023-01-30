@@ -71,6 +71,16 @@ public class CallComposite {
 
     private func launch(_ callConfiguration: CallConfiguration,
                         localOptions: LocalOptions?) {
+
+        let vc = createCallCompositeViewController(callConfiguration,
+                                                   localOptions: localOptions)
+        present(vc)
+    }
+
+    private func createCallCompositeViewController(
+        _ callConfiguration: CallConfiguration,
+        localOptions: LocalOptions?
+    ) -> UIViewController {
         logger.debug("launch composite experience")
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
@@ -85,14 +95,12 @@ public class CallComposite {
         guard let store = self.store else {
             fatalError("Construction of dependencies failed")
         }
-        let toolkitHostingController = makeToolkitHostingController(
+        return makeToolkitHostingController(
             router: NavigationRouter(store: store, logger: logger),
             logger: logger,
             viewFactory: viewFactory,
             isRightToLeft: localizationProvider.isRightToLeft
         )
-
-        present(toolkitHostingController)
     }
 
     /// Start Call Composite experience with joining a Teams meeting.
@@ -106,6 +114,15 @@ public class CallComposite {
                                                   displayName: remoteOptions.displayName)
 
         launch(callConfiguration, localOptions: localOptions)
+    }
+
+    public func getViewController(remoteOptions: RemoteOptions,
+                                  localOptions: LocalOptions? = nil) -> UIViewController {
+        let callConfiguration = CallConfiguration(locator: remoteOptions.locator,
+                                                  credential: remoteOptions.credential,
+                                                  displayName: remoteOptions.displayName)
+        return createCallCompositeViewController(callConfiguration,
+                                                 localOptions: localOptions)
     }
 
     /// Set ParticipantViewData to be displayed for the remote participant. This is data is not sent up to ACS.

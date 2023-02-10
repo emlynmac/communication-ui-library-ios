@@ -18,9 +18,11 @@ struct CallingView: View {
     }
 
     @ObservedObject var viewModel: CallingViewModel
+    @ObservedObject var injectedOverlayState: InjectedOverlayState
     let avatarManager: AvatarViewManagerProtocol
     let viewManager: VideoViewManager
     let leaveCallConfirmationListSourceView = UIView()
+    let headerButtonStates: [CustomButtonState]
 
     @Environment(\.horizontalSizeClass) var widthSizeClass: UserInterfaceSizeClass?
     @Environment(\.verticalSizeClass) var heightSizeClass: UserInterfaceSizeClass?
@@ -32,17 +34,23 @@ struct CallingView: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                if getSizeClass() != .iphoneLandscapeScreenSize {
-                    portraitCallingView
-                } else {
-                    landscapeCallingView
+        Group {
+            if let injectedView = injectedOverlayState.injectedView {
+                injectedView
+            } else {
+                GeometryReader { geometry in
+                    ZStack {
+                        if getSizeClass() != .iphoneLandscapeScreenSize {
+                            portraitCallingView
+                        } else {
+                            landscapeCallingView
+                        }
+                        errorInfoView
+                    }
+                    .frame(width: geometry.size.width,
+                           height: geometry.size.height)
                 }
-                errorInfoView
             }
-            .frame(width: geometry.size.width,
-                   height: geometry.size.height)
         }
         .environment(\.screenSizeClass, getSizeClass())
         .environment(\.appPhase, viewModel.appState)
@@ -137,7 +145,8 @@ struct CallingView: View {
 
     var infoHeaderView: some View {
         InfoHeaderView(viewModel: viewModel.infoHeaderViewModel,
-                       avatarViewManager: avatarManager)
+                       avatarViewManager: avatarManager,
+                       customButtonStates: headerButtonStates)
     }
 
     var bannerView: some View {
@@ -149,7 +158,7 @@ struct CallingView: View {
                             avatarViewManager: avatarManager,
                             videoViewManager: viewManager,
                             screenSize: getSizeClass())
-            .edgesIgnoringSafeArea(safeAreaIgnoreArea)
+        .edgesIgnoringSafeArea(safeAreaIgnoreArea)
     }
 
     var localVideoFullscreenView: some View {
@@ -158,8 +167,8 @@ struct CallingView: View {
                            viewManager: viewManager,
                            viewType: .localVideofull,
                            avatarManager: avatarManager)
-                .background(Color(StyleProvider.color.surface))
-                .edgesIgnoringSafeArea(safeAreaIgnoreArea)
+            .background(Color(StyleProvider.color.surface))
+            .edgesIgnoringSafeArea(safeAreaIgnoreArea)
         }
     }
 
@@ -194,7 +203,7 @@ extension CallingView {
         case (.compact, .regular):
             return .iphonePortraitScreenSize
         case (.compact, .compact),
-             (.regular, .compact):
+            (.regular, .compact):
             return .iphoneLandscapeScreenSize
         default:
             return .ipadScreenSize
@@ -207,8 +216,8 @@ extension CallingView {
               !viewModel.infoHeaderViewModel.isParticipantsListDisplayed,
               !viewModel.controlBarViewModel.isMoreCallOptionsListDisplayed,
               !viewModel.controlBarViewModel.isShareActivityDisplayed else {
-                return
-            }
+            return
+        }
         let areAllOrientationsSupported = SupportedOrientationsPreferenceKey.defaultValue == .all
         if newOrientation != orientation
             && newOrientation != .unknown

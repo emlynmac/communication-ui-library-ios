@@ -117,7 +117,17 @@ class EntryViewController: UIViewController {
         horizontalChatStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(horizontalChatStackView)
 
+        let callWithChatButton = UIButton()
+        callWithChatButton.backgroundColor = .systemBlue
+        callWithChatButton.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 20, bottom: 10, right: 20)
+        callWithChatButton.layer.cornerRadius = 8
+        callWithChatButton.setTitle("Call with Chat", for: .normal)
+        callWithChatButton.sizeToFit()
+        callWithChatButton.translatesAutoresizingMaskIntoConstraints = false
+        callWithChatButton.addTarget(self, action: #selector(onCallWithChatPressed), for: .touchUpInside)
+
         let verticalStackView = UIStackView(arrangedSubviews: [
+            callWithChatButton,
             horizontalCallingStackView,
             horizontalChatStackView])
         verticalStackView.spacing = margin
@@ -146,6 +156,14 @@ class EntryViewController: UIViewController {
             versionLabel.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -margin)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+
+    @objc func onCallWithChatPressed() {
+        let viewModel = CallWithChatDemoViewModel(envConfigSubject: envConfigSubject)
+        let swiftUIDemoView = CallWithChatDemoView(viewModel: viewModel)
+        let swiftUIDemoViewHostingController = UIHostingController(rootView: swiftUIDemoView)
+        swiftUIDemoViewHostingController.modalPresentationStyle = .fullScreen
+        present(swiftUIDemoViewHostingController, animated: true, completion: nil)
     }
 
     @objc func onCallingSwiftUIPressed() {

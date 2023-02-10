@@ -4,7 +4,7 @@
 //
 
 import AzureCommunicationCommon
-
+import Combine
 import UIKit
 import SwiftUI
 import FluentUI
@@ -16,8 +16,10 @@ public class CallComposite {
     public class Events {
         /// Closure to execute when error event occurs inside Call Composite.
         public var onError: ((CallCompositeError) -> Void)?
-        /// Closures to execute when participant has joined a call inside Call Composite.
+        /// Closure to execute when participant has joined a call inside Call Composite.
         public var onRemoteParticipantJoined: (([CommunicationIdentifier]) -> Void)?
+        /// Closure to execute on update of call status
+        public var onCallStatusChanged: ((CallingStatus) -> Void)?
     }
 
     /// The events handler for Call Composite
@@ -25,6 +27,7 @@ public class CallComposite {
 
     private let themeOptions: ThemeOptions?
     private let localizationOptions: LocalizationOptions?
+    private let customizationOptions: CustomizationOptions?
 
     // Internal dependencies
     private var logger: Logger = DefaultLogger(category: "Calling")
@@ -40,6 +43,8 @@ public class CallComposite {
     private var avatarViewManager: AvatarViewManagerProtocol?
     private var customCallingSdkWrapper: CallingSDKWrapperProtocol?
     private var debugInfoManager: DebugInfoManagerProtocol?
+    private var injectedOverlayState: InjectedOverlayState
+    private var cancellables = Set<AnyCancellable>()
 
     /// Get debug information for the Call Composite.
     public var debugInfo: DebugInfo {
@@ -57,6 +62,24 @@ public class CallComposite {
         themeOptions = options?.themeOptions
         localizationOptions = options?.localizationOptions
         localizationProvider = LocalizationProvider(logger: logger)
+        customizationOptions = options?.customizationOptions
+        injectedOverlayState = InjectedOverlayState()
+    }
+
+    public func setOverlay<V>(// overlayOptions: OverlayOptions,
+                              @ViewBuilder overlay: () -> V) where V: View {
+        withAnimation {
+            let view = overlay()
+            // review how we can do this without AnyView but with templates
+            injectedOverlayState.injectedView = AnyView(view)
+        }
+    }
+
+    /// Remove added overlay
+    public func removeOverlay() {
+        withAnimation {
+            injectedOverlayState.injectedView = nil
+        }
     }
 
     convenience init(withOptions options: CallCompositeOptions? = nil,
@@ -85,6 +108,7 @@ public class CallComposite {
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
             localOptions: localOptions,
+            customizationOptions: customizationOptions,
             callCompositeEventsHandler: events,
             withCallingSDKWrapper: self.customCallingSdkWrapper
         )
@@ -146,6 +170,7 @@ public class CallComposite {
     private func constructViewFactoryAndDependencies(
         for callConfiguration: CallConfiguration,
         localOptions: LocalOptions?,
+        customizationOptions: CustomizationOptions?,
         callCompositeEventsHandler: CallComposite.Events,
         withCallingSDKWrapper wrapper: CallingSDKWrapperProtocol? = nil
     ) -> CompositeViewFactoryProtocol {
@@ -168,6 +193,13 @@ public class CallComposite {
             localParticipantViewData: localOptions?.participantViewData
         )
         self.avatarViewManager = avatarViewManager
+        store.$state
+            .receive(on: RunLoop.main)
+            .removeDuplicates(by: { $0.callingState.status == $1.callingState.status })
+            .sink { [weak self] state in
+                self?.events.onCallStatusChanged?(state.callingState.status)
+            }
+            .store(in: &cancellables)
 
         self.errorManager = CompositeErrorManager(store: store, callCompositeEventsHandler: callCompositeEventsHandler)
         self.lifeCycleManager = UIKitAppLifeCycleManager(store: store, logger: logger)
@@ -186,6 +218,8 @@ public class CallComposite {
             logger: logger,
             avatarManager: avatarViewManager,
             videoViewManager: VideoViewManager(callingSDKWrapper: callingSdkWrapper, logger: logger),
+            customizationOptions: customizationOptions,
+            injectedOverlayState: injectedOverlayState,
             compositeViewModelFactory: CompositeViewModelFactory(
                 logger: logger,
                 store: store,
@@ -206,6 +240,7 @@ public class CallComposite {
         self.avatarViewManager = nil
         self.remoteParticipantsManager = nil
         self.debugInfoManager = nil
+        self.removeOverlay()
     }
 
     private func makeToolkitHostingController(router: NavigationRouter,

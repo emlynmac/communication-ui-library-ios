@@ -184,7 +184,8 @@ extension ChatMessageInfoModel {
             }
             return "\(participantsLabel) left the chat" // Localization
         case .topicUpdated:
-            return getTopicLabel()
+            // DISABLE topic change messages
+            return "" // getTopicLabel()
         default:
             return ""
         }

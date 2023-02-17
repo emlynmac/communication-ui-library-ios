@@ -128,6 +128,7 @@
 		521A024528FE1E8D002CAD8E /* TypingParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A024328FE1E8D002CAD8E /* TypingParticipantsView.swift */; };
 		6956EB16291341B0003CCC7E /* ReadReceiptInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6956EB15291341B0003CCC7E /* ReadReceiptInfoModel.swift */; };
 		69FEF0822909D68500F54FC4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FEF0812909D68500F54FC4 /* StringExtension.swift */; };
+		75399F7229A00DA200C7A8DF /* FluentUIResources-ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 75399F6D29A00D9700C7A8DF /* FluentUIResources-ios.bundle */; };
 		756F59672965DAD100BAFBF7 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F59652965DAD100BAFBF7 /* Reducer.swift */; };
 		756F59682965DAD100BAFBF7 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F59662965DAD100BAFBF7 /* StringConstants.swift */; };
 		756F596C2965E65F00BAFBF7 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F596B2965E65F00BAFBF7 /* Middleware.swift */; };
@@ -167,7 +168,6 @@
 		BDB1B8CB28F8A2940000300F /* IconButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1B8C928F8A2940000300F /* IconButtonViewModel.swift */; };
 		BDB1B8CE28F8A91A0000300F /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB1B8CD28F8A91A0000300F /* Icon.swift */; };
 		BDB1B8D628F8C8D30000300F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB1B8D528F8C8D30000300F /* Assets.xcassets */; };
-		FAE2B34029A0072A00A5661E /* FluentUIResources-ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FAE2B33F29A0072A00A5661E /* FluentUIResources-ios.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +177,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 50CB81C128C26E0C00680566;
 			remoteInfo = AzureCommunicationUIChat;
+		};
+		75399F6C29A00D9700C7A8DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A5DA88FC226FAA01000A8EA8;
+			remoteInfo = FluentUIResources;
+		};
+		75399F6E29A00D9700C7A8DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8FD01166228A820600D25925;
+			remoteInfo = FluentUILib;
+		};
+		75399F7029A00D9700C7A8DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A5CEC15A20D980B30016922A;
+			remoteInfo = FluentUITests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -305,6 +326,7 @@
 		521A024328FE1E8D002CAD8E /* TypingParticipantsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingParticipantsView.swift; sourceTree = "<group>"; };
 		6956EB15291341B0003CCC7E /* ReadReceiptInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadReceiptInfoModel.swift; sourceTree = "<group>"; };
 		69FEF0812909D68500F54FC4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FluentUI.xcodeproj; path = "../../../../fluentui-apple/ios/FluentUI.xcodeproj"; sourceTree = "<group>"; };
 		756F59652965DAD100BAFBF7 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		756F59662965DAD100BAFBF7 /* StringConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		756F596B2965E65F00BAFBF7 /* Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -343,7 +365,6 @@
 		BDB1B8C928F8A2940000300F /* IconButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconButtonViewModel.swift; sourceTree = "<group>"; };
 		BDB1B8CD28F8A91A0000300F /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		BDB1B8D528F8C8D30000300F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FAE2B33F29A0072A00A5661E /* FluentUIResources-ios.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "FluentUIResources-ios.bundle"; path = "../../../../../../../../../../Library/Developer/Xcode/DerivedData/Woodgrove_Client-fexnlfaxogalugbwtstklpeiouil/Build/Products/Debug-iphonesimulator/FluentUIResources-ios.bundle"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,7 +399,7 @@
 		50CB81B828C26E0B00680566 = {
 			isa = PBXGroup;
 			children = (
-				FAE2B33F29A0072A00A5661E /* FluentUIResources-ios.bundle */,
+				75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */,
 				7584840C291D81AE006373B3 /* Shared Sources */,
 				50CB81C428C26E0C00680566 /* Sources */,
 				50CB81CE28C26E0C00680566 /* Tests */,
@@ -825,6 +846,16 @@
 			path = Factories;
 			sourceTree = "<group>";
 		};
+		75399F6729A00D9700C7A8DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75399F6D29A00D9700C7A8DF /* FluentUIResources-ios.bundle */,
+				75399F6F29A00D9700C7A8DF /* libFluentUI.a */,
+				75399F7129A00D9700C7A8DF /* FluentUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7584840C291D81AE006373B3 /* Shared Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,6 +1011,12 @@
 			mainGroup = 50CB81B828C26E0B00680566;
 			productRefGroup = 50CB81C328C26E0C00680566 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 75399F6729A00D9700C7A8DF /* Products */;
+					ProjectRef = 75399F6629A00D9700C7A8DF /* FluentUI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				50CB81C128C26E0C00680566 /* AzureCommunicationUIChat */,
@@ -988,6 +1025,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		75399F6D29A00D9700C7A8DF /* FluentUIResources-ios.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FluentUIResources-ios.bundle";
+			remoteRef = 75399F6C29A00D9700C7A8DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75399F6F29A00D9700C7A8DF /* libFluentUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFluentUI.a;
+			remoteRef = 75399F6E29A00D9700C7A8DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75399F7129A00D9700C7A8DF /* FluentUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FluentUITests.xctest;
+			remoteRef = 75399F7029A00D9700C7A8DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		50CB81C028C26E0C00680566 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -995,7 +1056,7 @@
 			files = (
 				BDB1B8D628F8C8D30000300F /* Assets.xcassets in Resources */,
 				50CB81E728C2701C00680566 /* Localizable.strings in Resources */,
-				FAE2B34029A0072A00A5661E /* FluentUIResources-ios.bundle in Resources */,
+				75399F7229A00DA200C7A8DF /* FluentUIResources-ios.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
